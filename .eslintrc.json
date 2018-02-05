@@ -3,6 +3,13 @@
   "globals": {
     "document": true
   },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  },
   "rules": {
     "quotes": [ 2, "single", "avoid-escape" ],
     "react/jsx-filename-extension": [ 1, { "extensions": [".js", ".jsx"] } ],
@@ -13,7 +20,8 @@
           }],
     "object-curly-spacing": [ "error", "always" ],
     "array-bracket-spacing": [ "error", "always" ],
+    "jsx-quotes": [2, "prefer-single" ],
     "react/require-default-props": [ 0 ],
-    "jsx-quotes":  [2, "prefer-single" ]
+    "react/jsx-curly-spacing": [2 , "always", { "spacing": { "objectLiterals": "never"} }]
   }
 }

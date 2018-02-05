@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Header, Container, Divider, Icon } from 'semantic-ui-react';
+import { Header, Container, Divider } from 'semantic-ui-react';
 
 import { pullRight, h1 } from './layout.css';
 
 const Layout = ({ children }) => (
   <Container>
     <Link to='/'>
-      <Header as='h1' className={h1}>
-          webpack-for-react
+      <Header as='h1' className={ h1 }>
+        Cocolsillo
       </Header>
     </Link>
     {children}
     <Divider />
-    <p className={pullRight}>
-        Made with <Icon name='heart' color='red' /> by Esau Silva
+    <p className={ pullRight }>
+      <b>Cocolsillo</b>&nbsp; by Santiago Bandiera ©MIT
     </p>
   </Container>
 );

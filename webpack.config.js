@@ -1,21 +1,29 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
 
 const port = process.env.PORT || 3000;
 
+const APP = path.join(__dirname, 'app');
+
 module.exports = {
-  entry: './src/index.js',
+  entry: APP,
   output: {
     filename: 'bundle.[hash].js',
   },
   devtool: 'inline-source-map',
+  resolve: {
+    modules: [ APP, 'node_modules' ],
+    extensions: [ '.js', '.jsx' ],
+  },
   module: {
     rules: [
       // First Rule
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: [ 'babel-loader' ],
       },
       // Second Rule
       {
