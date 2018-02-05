@@ -1,23 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Header, Container, Divider } from 'semantic-ui-react';
-
-import { pullRight, h1 } from './layout.css';
+import AppBar from 'material-ui/AppBar';
 
 const Layout = ({ children }) => (
-  <Container>
-    <Link to='/'>
-      <Header as='h1' className={ h1 }>
-        Cocolsillo
-      </Header>
-    </Link>
+  <div>
+    <AppBar title='Cocolsillo' />
     {children}
-    <Divider />
-    <p className={ pullRight }>
-      <b>Cocolsillo</b>&nbsp; by Santiago Bandiera ©MIT
-    </p>
-  </Container>
+  </div>
 );
 
 Layout.propTypes = {

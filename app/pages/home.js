@@ -1,14 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import Layout from 'components/layout';
+import Summary from 'components/summary';
 
 const Home = () => (
   <Layout>
-    <p>Hello World of React and Webpack!</p>
-    <p>
-      <Link to='/dynamic'> Navigate to Dynamic Page </Link>
-    </p>
+    <Summary />
   </Layout>
 );
 
