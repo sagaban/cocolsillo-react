@@ -5,10 +5,13 @@
   "main": "index.js",
   "author": "Santiago Bandiera",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-prop-types": "^0.4.0",
     "react-router-dom": "^4.2.2",
     "semantic-ui-react": "^0.78.1"
   },
