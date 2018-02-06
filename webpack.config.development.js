@@ -11,7 +11,7 @@ const APP = path.join(__dirname, 'app');
 module.exports = {
   entry: [ 'react-hot-loader/patch', APP ],
   output: {
-    filename: 'bundle.[hash].js',
+    filename: '[name].[hash].js',
     publicPath: '/',
   },
   devtool: 'inline-source-map',
@@ -54,10 +54,14 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-      favicon: 'public/favicon.ico',
+      favicon: 'public/favicon.png',
     }),
     new webpack.DefinePlugin({
       firebaseConfig: JSON.stringify(firebaseConfig),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: [ 'vendor' ],
+      minChunks: Infinity,
     }),
   ],
 

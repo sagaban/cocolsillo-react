@@ -6,7 +6,9 @@
   "author": "Santiago Bandiera",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --config webpack.config.development.js",
+    "prebuild": "rimraf dist",
+    "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.production.js"
   },
   "dependencies": {
     "firebase": "^4.9.1",
@@ -27,6 +29,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
+    "cross-env": "^5.1.3",
     "css-loader": "^0.28.9",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -34,12 +37,15 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "normalize.css": "^7.0.0",
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.1.0",
     "precss": "^3.1.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
   }
