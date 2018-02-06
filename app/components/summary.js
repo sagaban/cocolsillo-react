@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AddTransactionButton from 'components/add-transaction-button';
+import { isLoaded, isEmpty } from 'react-redux-firebase';
 
-class Summary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [ 1, 2 ],
-    };
-    this.onAddTransactionClick = this.onAddTransactionClick.bind(this);
-  }
 
-  onAddTransactionClick() {
+const Summary = ({ transactions, pushTransaction }) => {
+  const onAddTransactionClick = () => {
     const newValue = Math.floor(Math.random() * 100);
-    this.setState({
-      list: this.state.list.concat(newValue),
-    });
-    this.props.pushTransaction({ amount: newValue });
+    pushTransaction({ amount: newValue });
+  };
+  let transactionList;
+  if (!isLoaded(transactions)) {
+    transactionList = 'Loading...';
+  } else {
+    transactionList = isEmpty(transactions)
+      ? 'There are not transactions'
+      : Object.keys(transactions).map((key, id) => (
+        <div key={ key } id={ id }>{ transactions[key].amount }</div>
+      ));
   }
-
-  render() {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          {this.state.list.map((entry, index) => <div key={ `${entry}_${index * 2}` }>{entry}</div>)}
-        </div>
-        <AddTransactionButton onClick={ this.onAddTransactionClick } />
-      </div>);
-  }
-}
+        { transactionList }
+      </div>
+      <AddTransactionButton onClick={ onAddTransactionClick } />
+    </div>);
+};
 
 Summary.propTypes = {
+  transactions: PropTypes.object, //eslint-disable-line
   pushTransaction: PropTypes.func,
 };
 
