@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-
 const port = process.env.PORT || 3000;
 
 const APP = path.join(__dirname, 'app');
@@ -41,6 +40,7 @@ module.exports = {
               sourceMap: true,
             },
           },
+          'postcss-loader',
         ],
       },
     ],

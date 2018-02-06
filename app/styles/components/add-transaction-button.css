@@ -1,0 +1,17 @@
+.float-button {
+  margin: 0;
+  top: 'auto';
+  right: 20;
+  bottom: 20;
+  left: 'auto';
+  position: 'fixed';
+  color: red;
+  background-color: brown;
+}
+
+/* .button--default { @mixin colorize-button $default; }
+.button--primary { @mixin colorize-button $primary; }
+.button--secondary { @mixin colorize-button $secondary; }
+.button--warning { @mixin colorize-button $warning; }
+.button--danger { @mixin colorize-button $danger; }
+.button--success { @mixin colorize-button $success; } */
