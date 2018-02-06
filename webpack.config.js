@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const firebaseConfig = require('./firebase.config');
+
 const port = process.env.PORT || 3000;
 
 const APP = path.join(__dirname, 'app');
@@ -53,6 +55,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
+    }),
+    new webpack.DefinePlugin({
+      firebaseConfig: JSON.stringify(firebaseConfig),
     }),
   ],
 

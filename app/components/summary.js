@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import AddTransactionButton from 'components//add-transaction-button';
+import PropTypes from 'prop-types';
+import AddTransactionButton from 'components/add-transaction-button';
 
 class Summary extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Summary extends Component {
     this.setState({
       list: this.state.list.concat(newValue),
     });
+    this.props.pushTransaction({ amount: newValue });
   }
 
   render() {
@@ -27,4 +29,9 @@ class Summary extends Component {
       </div>);
   }
 }
+
+Summary.propTypes = {
+  pushTransaction: PropTypes.func,
+};
+
 export default Summary;

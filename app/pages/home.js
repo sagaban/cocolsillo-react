@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/layout';
-import Summary from 'components/summary';
+import Summary from 'containers/summary';
 
 const Home = () => (
   <Layout>
