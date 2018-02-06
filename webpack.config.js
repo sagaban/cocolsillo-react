@@ -8,9 +8,10 @@ const port = process.env.PORT || 3000;
 const APP = path.join(__dirname, 'app');
 
 module.exports = {
-  entry: APP,
+  entry: [ 'react-hot-loader/patch', APP ],
   output: {
     filename: 'bundle.[hash].js',
+    publicPath: '/',
   },
   devtool: 'inline-source-map',
   resolve: {
@@ -46,6 +47,9 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
@@ -57,5 +61,6 @@ module.exports = {
     port,
     historyApiFallback: true,
     open: true,
+    hot: true,
   },
 };
