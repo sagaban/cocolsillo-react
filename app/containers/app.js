@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -7,6 +7,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import firebase from 'firebase';
 import { reactReduxFirebase } from 'react-redux-firebase';
 import rootReducer from 'reducers/index';
+import { offline } from '@redux-offline/redux-offline';
+import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
+
 import Home from 'pages/home';
 import DynamicPage from 'pages/dynamic-page';
 import NoMatch from 'pages/no-match';
@@ -27,9 +30,20 @@ firebase.initializeApp(firebaseConfig);
 // Add redux Firebase to compose
 const createStoreWithFirebase = compose(reactReduxFirebase(firebase, rrfConfig))(createStore);
 
+// Do not log on production
+const middlewares = [];
+if (process.env.NODE_ENV === 'development') {
+  const { logger } = require('redux-logger'); // eslint-disable-line
+  middlewares.push(logger);
+}
+
 // Create store with reducers and initial state
 const initialState = {};
-const store = createStoreWithFirebase(rootReducer, initialState);
+const store = createStoreWithFirebase(
+  rootReducer,
+  initialState,
+  compose(applyMiddleware(...middlewares), offline(offlineConfig)),
+);
 
 
 const App = () => (

@@ -58,6 +58,9 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       firebaseConfig: JSON.stringify(firebaseConfig),
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: [ 'vendor' ],

@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddTransactionButton from 'components/add-transaction-button';
-import { isLoaded, isEmpty } from 'react-redux-firebase';
+import CircularProgress from 'material-ui/CircularProgress';
 
-
-const Summary = ({ transactions, pushTransaction }) => {
+const Summary = ({
+  isDataLoaded,
+  isDataEmpty,
+  transactions,
+  pushTransaction,
+}) => {
   const onAddTransactionClick = () => {
     const newValue = Math.floor(Math.random() * 100);
     pushTransaction({ amount: newValue });
   };
   let transactionList;
-  if (!isLoaded(transactions)) {
-    transactionList = 'Loading...';
+  if (!isDataLoaded) {
+    transactionList = <CircularProgress />;
   } else {
-    transactionList = isEmpty(transactions)
+    transactionList = isDataEmpty
       ? 'There are not transactions'
       : Object.keys(transactions).map((key, id) => (
         <div key={ key } id={ id }>{ transactions[key].amount }</div>
@@ -30,6 +34,8 @@ const Summary = ({ transactions, pushTransaction }) => {
 
 Summary.propTypes = {
   transactions: PropTypes.object, //eslint-disable-line
+  isDataLoaded: PropTypes.bool,
+  isDataEmpty: PropTypes.bool,
   pushTransaction: PropTypes.func,
 };
 
