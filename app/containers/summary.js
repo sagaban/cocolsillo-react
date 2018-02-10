@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import SummaryComponent from 'components/summary';
 import { selectTransactionsFromState } from 'selectors/firebase';
+import { firebaseActions } from 'actions';
 
 const Summary = (props) => {
-  const pushTransaction = transaction => props.firebase.push('transactions', transaction);
-  return (<SummaryComponent { ...props } pushTransaction={ pushTransaction } />);
+  return (<SummaryComponent { ...props } />);
 };
 
 Summary.propTypes = {
@@ -22,14 +22,18 @@ const mapStateToProps = state => ({
   transactions: selectTransactionsFromState(state),
 });
 
-const mergeProps = ({ transactions }, dispatchProps, { firebase }) => {
+const mapDispatchToProps = dispatch => ({
+  pushTransaction: value => dispatch(firebaseActions.addTransaction(value)),
+});
+
+const mergeProps = ({ transactions }, { pushTransaction }) => {
   const isDataLoaded = isLoaded(transactions);
   const isDataEmpty = isDataLoaded && isEmpty(transactions);
   return {
-    firebase,
     transactions,
     isDataLoaded,
     isDataEmpty,
+    pushTransaction,
   };
 };
 
@@ -37,5 +41,5 @@ export default compose(
   firebaseConnect([
     'transactions', // { path: '/transactions' } // object notation
   ]),
-  connect(mapStateToProps, {}, mergeProps),
+  connect(mapStateToProps, mapDispatchToProps, mergeProps),
 )(Summary);
